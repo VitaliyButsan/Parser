@@ -11,8 +11,7 @@ import UIKit
 class ViewController2: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textView: UITextView!
-    //@IBOutlet weak var textField: UITextField!
-    var jsON: Any = 777
+    var jsON: Any = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,6 @@ class ViewController2: UIViewController {
         // Listen for keyboard events
         registerKeyboardNotification()
         // appear data on view
-        print("FirstSTEP")
         textView.isEditable = false
         self.textView.text = "\(jsON.self)"
     }
