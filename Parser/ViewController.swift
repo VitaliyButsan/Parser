@@ -65,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
         self.myTableView.delegate = self
         self.myTableView.dataSource = self
-        myTableView.backgroundColor = UIColor.red
+        //myTableView.backgroundColor = UIColor.red
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -89,6 +89,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         cell.textLabel?.text = "row=\(indexPath.section), cell=\(indexPath.row)"
+        cell.backgroundColor = UIColor.clear
         return cell
     }
 
