@@ -26,6 +26,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.json = try JSONSerialization.jsonObject(with: data, options: [])
                 self.jsonCreated = true
                 print("\nJSON_Created")
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "Details", sender: self)
+                }
             } catch {
                 print("Err")
             }
@@ -34,9 +37,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // segue for transmission data betwen Controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        while self.jsonCreated != true {
-            print(".", terminator: "")
-        }
         if let ViewController2 = segue.destination as? ViewController2 {
             ViewController2.jsON = json
         }

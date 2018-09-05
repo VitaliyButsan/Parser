@@ -28,7 +28,6 @@
                                 </state>
                                 <connections>
                                     <action selector="get:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tEO-9K-IhQ"/>
-                                    <segue destination="fju-uh-LBL" kind="show" id="pVp-NL-2DG"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uvv-wV-FTi">
@@ -73,11 +72,12 @@
                         <outlet property="button1" destination="nMz-XT-grL" id="ldt-IA-a4W"/>
                         <outlet property="button3" destination="FYK-yg-gVH" id="gm4-Uk-KWv"/>
                         <outlet property="myTableView" destination="Uvv-wV-FTi" id="wRh-30-Yoh"/>
+                        <segue destination="fju-uh-LBL" kind="show" identifier="Details" id="1j6-08-xj5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2190" y="111.97183098591549"/>
+            <point key="canvasLocation" x="-2181" y="112"/>
         </scene>
         <!--View Controller2-->
         <scene sceneID="PYz-PS-C2R">
