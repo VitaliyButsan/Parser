@@ -4,15 +4,16 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +73,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-wa-rUZ">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Dh-wa-rUZ" userLabel="Blinker Inside Get Button">
                                 <rect key="frame" x="144" y="412" width="4" height="4"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.89170745481927716" green="0.0" blue="0.078983666547787587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -91,11 +92,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="K41-Yf-g3V"/>
                     <connections>
+                        <outlet property="blinkerInsideGetButton" destination="0Dh-wa-rUZ" id="Hsg-7e-xC9"/>
                         <outlet property="button1" destination="nMz-XT-grL" id="ldt-IA-a4W"/>
                         <outlet property="button3" destination="FYK-yg-gVH" id="gm4-Uk-KWv"/>
                         <outlet property="myTableView" destination="Uvv-wV-FTi" id="wRh-30-Yoh"/>
-                        <outlet property="my_Get" destination="6w9-C2-a7L" id="9fs-oa-EP8"/>
-                        <outlet property="smallLabelInsideGetButton" destination="0Dh-wa-rUZ" id="YfI-DZ-wUu"/>
+                        <outlet property="outletButtonGet" destination="6w9-C2-a7L" id="NyM-m9-C62"/>
                         <segue destination="fju-uh-LBL" kind="show" identifier="ResponseVC" id="1j6-08-xj5"/>
                     </connections>
                 </viewController>
@@ -103,10 +104,10 @@
             </objects>
             <point key="canvasLocation" x="-2182.5" y="111.97183098591549"/>
         </scene>
-        <!--Response View Controller-->
+        <!--ResponseVC-->
         <scene sceneID="PYz-PS-C2R">
             <objects>
-                <viewController id="fju-uh-LBL" customClass="ResponseViewController" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fju-uh-LBL" customClass="ResponseVC" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fOG-Tv-qvP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,7 +117,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Id-XQ-xKL">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="445"/>
-                                        <color key="backgroundColor" red="0.70013482973300756" green="1" blue="0.88270326785351694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.22430440783500671" green="0.18837207555770874" blue="0.1296176016330719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ehg-r1-rpL">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="445"/>
@@ -242,7 +243,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.6734054318022844" green="1" blue="0.81535510863096738" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.22430440783500671" green="0.18837207555770874" blue="0.1296176016330719" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="f0p-oy-aNx" firstAttribute="bottom" secondItem="4Sj-kc-VUA" secondAttribute="bottom" id="0qr-FX-ODR"/>
                             <constraint firstItem="f0p-oy-aNx" firstAttribute="top" secondItem="4Sj-kc-VUA" secondAttribute="top" id="NaU-WH-oMi"/>
@@ -263,10 +264,10 @@
             </objects>
             <point key="canvasLocation" x="-1421.25" y="111.97183098591549"/>
         </scene>
-        <!--Parsing Data Table View Controller-->
+        <!--ParsingTVC-->
         <scene sceneID="cKQ-Xb-mdF">
             <objects>
-                <tableViewController id="sfi-MN-nBX" customClass="ParsingDataTableViewController" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sfi-MN-nBX" customClass="ParsingTVC" customModule="Parser" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Jqn-El-dAL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,28 +1,24 @@
 //
-//  ViewController2.swift
+//  ResponseVC.swift
 //  Parser
 //
-//  Created by vit on 8/8/18.
-//  Copyright © 2018 vit. All rights reserved.
+//  Created by VitKet on 8/8/18.
+//  Copyright © 2018 VitKet. All rights reserved.
 //
 
 import UIKit
 
-struct ParseValue: Decodable {
-    var arr = ["name", "link", "id"]
-}
+class ResponseVC: UIViewController {
+    var JSONFromMainVC: Any = 0
+    var dataFromMainVC: Any = 0
+    var inputKeysArray: [String] = []
+    var responseValuesArray : [Any] = []
+    var counter = 0
 
-class ResponseViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var textField: UITextField!
-
-    var jsON: Any = 0
-    var responseData: Any = 0
-    var responseInputKeysArray: [String] = []
-    var responseValuesWithoutKeysArray : [Any] = []
-    var counter = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -34,7 +30,7 @@ class ResponseViewController: UIViewController {
         registerKeyboardNotification()
         // appear data on view
         textView.isEditable = false
-        self.textView.text = "\(jsON.self)"
+        self.textView.text = "\(JSONFromMainVC.self)"
     }
 
     deinit {
@@ -55,67 +51,64 @@ class ResponseViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    // handle if keyboard is show
+    // if keyboard will show
     @objc func kbWillShow(_ notification: Notification) {
         let userInfo = notification.userInfo
         let kbFrameSize = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         scrollView.contentOffset = CGPoint(x: 0, y: kbFrameSize.height)
     }
 
-    // handle if keyboard is hide
+    // if keyboard will hide
     @objc func kbWillHide() {
         scrollView.contentOffset = CGPoint.zero
     }
-
+    
+    // put input keys and values to array
     @IBAction func fixButton(_ sender: UIButton) {
         let inputKey = textField.text!
         textField.text = ""
-
+        // check to type of JSONfromMainVC
         do {
-            if let dictionaryData = try JSONSerialization.jsonObject(with: responseData as! Data) as? [String: Any] {
+            if let dictionaryData = try JSONSerialization.jsonObject(with: dataFromMainVC as! Data) as? [String: Any] {
                 for (key, value) in dictionaryData {
                     if key == inputKey {
-                        responseInputKeysArray.append(inputKey)
-                        responseValuesWithoutKeysArray.append(value)
+                        inputKeysArray.append(inputKey)
+                        responseValuesArray.append(value)
                         print("MEMBER: \(key) OMG \(value)")
                     }
-//                    print(key + ":", value)
                 }
             } else {
-                if let arrayData = try JSONSerialization.jsonObject(with: responseData as! Data) as? [[String: Any]] {
-                    for value in arrayData {
-
-                        for (ky,vale) in value {
-                            if ky == inputKey {
-                                responseInputKeysArray.append(inputKey)
-                                responseValuesWithoutKeysArray.append(vale)
-                                print("MOONLIGHT: \(ky) OMG \(vale)")
+                if let arrayData = try JSONSerialization.jsonObject(with: dataFromMainVC as! Data) as? [[String: Any]] {
+                    for cell in arrayData {
+                        for (key, value) in cell {
+                            if key == inputKey {
+                                inputKeysArray.append(inputKey)
+                                responseValuesArray.append(value)
+                                print("MOONLIGHT: \(key) OMG \(value)")
                             }
                         }
                     }
                 }
             }
         } catch {}
-
-
-        //        do {
-        //            let jsn = try JSONDecoder().decode([ParseValue].self, from: responseData as! Data)
-        //            print("My", jsn)
-        //        } catch let error {
-        //            print(error)
-        //        }
     }
+    
     @IBAction func parserButton(_ sender: UIButton) {
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "Parser", sender: self)
         }
 
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let ParsingDataTableViewController = segue.destination as? ParsingDataTableViewController {
-            ParsingDataTableViewController.parsingDataInputKeysArray = responseInputKeysArray
-            ParsingDataTableViewController.parsingDataValuesWithOutKeysArray = responseValuesWithoutKeysArray
+        if let ParsingTVC = segue.destination as? ParsingTVC {
+            ParsingTVC.parsingKeysArray = inputKeysArray
+            ParsingTVC.parsingValuesArray = responseValuesArray
+        }
+        if let MainVC = segue.destination as? MainVC {
+            MainVC.button1.backgroundColor = UIColor.red
         }
     }
 
+    
 }

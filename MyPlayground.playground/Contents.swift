@@ -1,4 +1,48 @@
+
 import Foundation
+
+
+// 1) variant
+let testString = "Hit the road Jack, Jack on road back jach jach jack jack"
+let smallTestString = testString.replacingOccurrences(of: ",", with: "")
+
+// create array from string
+var wordsArray = smallTestString.lowercased().split(separator: " ")
+var keyValueStore = [String: Int]()
+
+    // from array to dictionary
+    for word in wordsArray {
+        keyValueStore.updateValue(0, forKey: String(word))
+    }
+
+    // compared word of array to dictionary key(String), if it equal - value(Int) incremented.
+    for word in wordsArray {
+        for (key, value) in keyValueStore {
+            if key == word {
+                keyValueStore.updateValue(value + 1, forKey: key)
+            }
+        }
+    }
+
+    // sorted dictionary by descending values
+    var newDictStore = keyValueStore.sorted { $0.value > $1.value }
+
+    // output to std_out
+    for (dictKeyWord, equals) in newDictStore
+    {
+        for wordFromArray in wordsArray
+        {
+            if dictKeyWord == wordFromArray{
+                print(dictKeyWord + ":", equals)
+                wordsArray.removeAll(where: { $0 == wordFromArray })
+                
+                //wordsArray.filter({$0 != wordFromArray})
+                //wordsArray.removeAtIndex(wordsArray.indexOf(wordFromArray))
+            }
+        }
+
+    }
+
 
 /*
  Given an array of words, count the unique words in it.
@@ -20,7 +64,7 @@ import Foundation
  
  Proper error checking/exception handling is not required.
  
- */
+ 
 
 struct Word: Comparable, CustomStringConvertible
 {
@@ -51,3 +95,7 @@ func words() -> [String] {
 }
 
 print("Hello world")
+
+ 
+ */
+
