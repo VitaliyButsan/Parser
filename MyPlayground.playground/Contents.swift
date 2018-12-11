@@ -1,7 +1,12 @@
 
- Given an array of words, count the unique words in it.
- Sort the words by descending frequency.
- Then display the result to standard out.
+/*
+ 
+ //============================TASK ====================================
+ //=====================================================================
+ 
+ 1) Given an array of words, count the unique words in it.
+ 2) Sort the words by descending frequency.
+ 3) Then display the result to standard out.
  
  Example Input:
  The quick brown fox jumps over the lazy brown dog.
@@ -17,8 +22,52 @@
  dog: 1
  
  Proper error checking/exception handling is not required.
+ */
+
+//=======================================================================
+//=======================================================================
+
+
+
+
+import Foundation
+
+/*
+ //=========================== VARIANT I =================================
+ //=======================================================================
  
+ let testString = "Hit the road Jack, Jack on road back, Jack, Josh, JACK"
+ let smallTestString = testString.replacingOccurrences(of: ",", with: "")
  
+ // create array from string
+ var wordsArray = smallTestString.lowercased().split(separator: " ")
+ var keyValueStore = [String: Int]()
+ 
+ // from array to dictionary
+ for word in wordsArray {
+ keyValueStore.updateValue(0, forKey: String(word))
+ }
+ 
+ // compared word of array to dictionary key(String), if it equal - value(Int) incremented.
+ for word in wordsArray {
+ for (key, value) in keyValueStore {
+ if key == word {
+ keyValueStore.updateValue(value + 1, forKey: key)
+ }
+ }
+ }
+ 
+ // sorted dictionary by descending values
+ var sortedDictStore = keyValueStore.sorted { $0.value > $1.value }
+ 
+ for (key, value) in sortedDictStore {
+ print(key, value)
+ }
+ 
+ */
+//============================ VARIANT II =============================
+//=====================================================================
+
 
 struct Word: Comparable, CustomStringConvertible
 {
@@ -48,7 +97,69 @@ func words() -> [String] {
     return input.lowercased().components(separatedBy: .whitespacesAndNewlines)
 }
 
-print("Hello world")
+
+var storeDict = [String: Int]()
+var tempDict = [String: Int]()
+var descendingFrequencyWords = [Word]()
+var finishArray = [Any]()
+
+// from array to Dict
+for word in words() {
+    storeDict.updateValue(0, forKey: word)
+}
+
+// compared word of array to dictionary key(String), if it equal - value(Int) incremented.
+for word in words() {
+    for (key, value) in storeDict {
+        if key == word {
+            storeDict.updateValue(value + 1, forKey: key)
+        }
+    }
+}
+
+
+// each pair of counted dict put to new array
+for (key, value) in storeDict {
+    let word = Word(string: key, frequency: value)
+    descendingFrequencyWords.append(word)
+}
+// sorted array Words by their descending frequency values
+let sortedArray = descendingFrequencyWords.sorted(by: {$0 > $1})
+var savedDict: Word?
+
+// sorted by alphabetic descending frequency
+for (index, freshDict) in sortedArray.enumerated() {
+    if let oldDict = savedDict {
+        if oldDict.frequency == freshDict.frequency {
+            tempDict.updateValue(oldDict.frequency, forKey: oldDict.string)
+            
+            if index == sortedArray.count - 1 {
+                for temp in tempDict.sorted(by: { $0.key < $1.key }) {
+                    finishArray.append(temp)
+                }
+            }
+            
+            savedDict = freshDict
+        } else {
+            tempDict.updateValue(oldDict.frequency, forKey: oldDict.string)
+            for temporary in tempDict.sorted(by: { $0.key < $1.key }) {
+                finishArray.append(temporary)
+            }
+            
+            tempDict.removeAll()
+            savedDict = freshDict
+        }
+        
+    } else {
+        savedDict = freshDict
+    }
+}
+
+// to STD_OUT
+for miniDict in finishArray {
+    print(miniDict)
+}
+
 
 
 
