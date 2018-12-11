@@ -50,4 +50,75 @@ func words() -> [String] {
     return input.lowercased().components(separatedBy: .whitespacesAndNewlines)
 }
 
-print("Hello world")
+let inputWords = words()
+var outputObjects = [Word]()
+let W = ["i", "am", "the", "end"]
+if let index = W.index(of: "i") {
+
+}
+
+func searchMatched(for word: String) -> Bool{
+    for (index,object) in outputObjects.enumerated() {
+        if object.string == word{
+            outputObjects[index].frequency += 1
+            return true
+        }
+    }
+    return false
+}
+
+for word in inputWords{
+    if searchMatched(for: word){
+    } else {
+        outputObjects.append(Word(string: word, frequency: 1))
+    }
+}
+
+// 1. Count the unique words in array.
+outputObjects.count
+// 2. Sort the words by descending frequency.
+outputObjects.sort(by: > )
+// 3. Then display the result to standard out.
+var one = 0
+outputObjects.forEach({print($0)})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 1) variant
+let testString = "Hit the road Jack, Jack on road back jach jach jack jack"
+let smallTestString = testString.replacingOccurrences(of: ",", with: "")
+// create array from string
+var wordsArray = smallTestString.lowercased().split(separator: " ")
+var keyValueStore = [String: Int]()
+// from array to dictionary
+for word in wordsArray {
+    keyValueStore.updateValue(0, forKey: String(word))
+}
+// compared word of array to dictionary key(String), if it equal - value(Int) incremented.
+for word in wordsArray {
+    for (key, value) in keyValueStore {
+        if key == word {
+            keyValueStore.updateValue(value + 1, forKey: key)
+        }
+    }
+}
+// sorted dictionary by descending values
+var newDictStore = keyValueStore.sorted { $0.value > $1.value }
+// output to std_out
+for (dictKeyWord, equals) in newDictStore
+{
+    for wordFromArray in wordsArray
+    {
+        if dictKeyWord == wordFromArray{
+            print(dictKeyWord + ":", equals)
+            wordsArray.removeAll(where: { $0 == wordFromArray })
+
+            //wordsArray.filter({$0 != wordFromArray})
+            //wordsArray.removeAtIndex(wordsArray.indexOf(wordFromArray))
+        }
+    }
+}
+
+
+
+
