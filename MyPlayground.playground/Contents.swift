@@ -39,10 +39,19 @@ struct Word: Comparable, CustomStringConvertible
     static func == (lhs: Word, rhs: Word) -> Bool {
         return lhs.frequency == lhs.frequency
     }
+
+    func alphabet(lhs: Word, rhs: Word) -> Bool {
+        if lhs.frequency == rhs.frequency {
+            return lhs.string > lhs.string
+        } else {
+            return lhs.frequency > rhs.frequency
+        }
+    }
     
     var description: String {
         return "\(self.string): \(self.frequency)"
     }
+
 }
 
 func words() -> [String] {
@@ -52,10 +61,6 @@ func words() -> [String] {
 
 let inputWords = words()
 var outputObjects = [Word]()
-let W = ["i", "am", "the", "end"]
-if let index = W.index(of: "i") {
-
-}
 
 func searchMatched(for word: String) -> Bool{
     for (index,object) in outputObjects.enumerated() {
@@ -74,13 +79,26 @@ for word in inputWords{
     }
 }
 
+func sortByAlphabet(_ lhs: Word, _ rhs: Word) -> Bool {
+    if lhs.frequency == rhs.frequency {
+        if lhs.string < rhs.string {
+            return true
+        } else {
+            return false
+        }
+    } else if lhs.frequency > rhs.frequency {
+        return true
+    } else {
+        return false
+    }
+}
 // 1. Count the unique words in array.
 outputObjects.count
-// 2. Sort the words by descending frequency.
-outputObjects.sort(by: > )
+// 2. Sort the words by descending frequency. && Sort alphabetically.
+outputObjects.sort(by: {sortByAlphabet($0, $1)})
 // 3. Then display the result to standard out.
-var one = 0
 outputObjects.forEach({print($0)})
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
